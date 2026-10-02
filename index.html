@@ -241,6 +241,50 @@
       background: linear-gradient(135deg, #38f5ff 0%, #00c7f2 100%);
     }
 
+    /* Navbar Right Actions & Language Selector */
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .lang-selector {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-pill);
+      padding: 3px 6px;
+      gap: 3px;
+      backdrop-filter: blur(8px);
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      line-height: 1;
+    }
+    .lang-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .lang-btn.active {
+      background: var(--cyan);
+      color: #070a14;
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+    .lang-divider {
+      color: rgba(255, 255, 255, 0.18);
+      font-size: 0.75rem;
+      user-select: none;
+    }
+
     /* Mobile Menu Toggle */
     .nav-toggle {
       display: none;
@@ -949,6 +993,13 @@
       .nav-toggle {
         display: block;
       }
+      .nav-right-actions {
+        gap: 10px;
+      }
+      .lang-btn {
+        padding: 4px 6px;
+        font-size: 0.75rem;
+      }
       .nav-links.mobile-open {
         display: flex;
         flex-direction: column;
@@ -986,22 +1037,32 @@
         <span class="nav-title">One Tap Strike!</span>
       </a>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
-
       <ul class="nav-links" id="navLinks">
-        <li><a href="#features">Características</a></li>
-        <li><a href="#modes">Modos de Juego</a></li>
-        <li><a href="#gallery">Capturas</a></li>
-        <li><a href="#vip">Pase VIP</a></li>
-        <li><a href="https://ajopollo.github.io/onetapstrike-privacy/" target="_blank" rel="noopener">Privacidad</a></li>
+        <li><a href="#features" data-i18n="nav_features">Características</a></li>
+        <li><a href="#modes" data-i18n="nav_modes">Modos de Juego</a></li>
+        <li><a href="#gallery" data-i18n="nav_gallery">Capturas</a></li>
+        <li><a href="#vip" data-i18n="nav_vip">Pase VIP</a></li>
+        <li><a href="https://ajopollo.github.io/onetapstrike-privacy/" target="_blank" rel="noopener" data-i18n="nav_privacy">Privacidad</a></li>
       </ul>
 
-      <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-nav-play">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M3 20.5v-17c0-.86.95-1.37 1.66-.91l14.28 8.5c.7.42.7 1.41 0 1.83l-14.28 8.5c-.71.46-1.66-.05-1.66-.92z"/>
-        </svg>
-        Descargar Gratis
-      </a>
+      <div class="nav-right-actions">
+        <div class="lang-selector" id="langSelector" role="group" aria-label="Language Selector">
+          <button type="button" class="lang-btn active" data-lang="es" onclick="setLanguage('es')">ES</button>
+          <span class="lang-divider">|</span>
+          <button type="button" class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+          <span class="lang-divider">|</span>
+          <button type="button" class="lang-btn" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+        </div>
+
+        <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-nav-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 20.5v-17c0-.86.95-1.37 1.66-.91l14.28 8.5c.7.42.7 1.41 0 1.83l-14.28 8.5c-.71.46-1.66-.05-1.66-.92z"/>
+          </svg>
+          <span data-i18n="nav_download">Descargar Gratis</span>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+      </div>
     </div>
   </header>
 
@@ -1011,16 +1072,16 @@
       <div class="hero-content">
         <div class="badge-pill">
           <img src="assets/img/golden_fly.svg" width="22" height="22" alt="Mosca Dorada" style="vertical-align: middle;">
-          <span>¡YA EN GOOGLE PLAY!</span>
+          <span data-i18n="hero_badge">¡YA EN GOOGLE PLAY!</span>
         </div>
 
-        <h1 class="hero-title">
+        <h1 class="hero-title" data-i18n-html="hero_title">
           Reflejos Puros.<br>
           <span class="gradient-text">Acción Instantánea.</span><br>
           Un Solo Toque.
         </h1>
 
-        <p class="hero-subtitle">
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
           El arcade casual más vertiginoso de Android. Pon a prueba tu destreza, golpea con precisión milimétrica, supera cientos de niveles a lo largo de 3 capítulos y conquista el podio mundial.
         </p>
 
@@ -1033,35 +1094,35 @@
               <path fill="#ea4335" d="M465 228.3L385.4 183l-60.1 51.3 60.1 51.3 79.6-45.3c14.2-8.1 22.8-23.2 22.8-39.6-.1-16.5-8.7-31.5-22.8-39.7z"/>
             </svg>
             <div class="gp-text-col">
-              <span class="gp-subtext">Disponible en</span>
+              <span class="gp-subtext" data-i18n="hero_cta_available">Disponible en</span>
               <span class="gp-maintext">Google Play</span>
             </div>
           </a>
 
           <a href="#modes" class="btn-secondary">
-            <span>Explorar Modos</span>
+            <span data-i18n="hero_cta_explore">Explorar Modos</span>
             <span>↓</span>
           </a>
         </div>
 
         <div class="hero-stats-row">
-          <div class="stat-pill"><span class="stat-icon">🛡️</span> PEGI 3 / Todo Público</div>
-          <div class="stat-pill"><span class="stat-icon">🏸</span> +60 Matamoscas Únicos</div>
-          <div class="stat-pill"><span class="stat-icon">📶</span> 100% Jugable Offline</div>
-          <div class="stat-pill"><span class="stat-icon">🏆</span> Ranking Cloud Global</div>
+          <div class="stat-pill"><span class="stat-icon">🛡️</span> <span data-i18n="hero_pill_pegi">PEGI 3 / Todo Público</span></div>
+          <div class="stat-pill"><span class="stat-icon">🏸</span> <span data-i18n="hero_pill_swatters">+60 Matamoscas Únicos</span></div>
+          <div class="stat-pill"><span class="stat-icon">📶</span> <span data-i18n="hero_pill_offline">100% Jugable Offline</span></div>
+          <div class="stat-pill"><span class="stat-icon">🏆</span> <span data-i18n="hero_pill_cloud">Ranking Cloud Global</span></div>
         </div>
       </div>
 
       <div class="hero-visual">
         <div class="phone-mockup-wrapper">
           <div class="floating-card-tag tag-top-left">
-            <span>🔥</span> Cientos de Niveles
+            <span>🔥</span> <span data-i18n="hero_tag_levels">Cientos de Niveles</span>
           </div>
           <div class="floating-card-tag tag-mid-right">
-            <span>🏆</span> Marcadores en Vivo
+            <span>🏆</span> <span data-i18n="hero_tag_leaderboards">Marcadores en Vivo</span>
           </div>
           <div class="floating-card-tag tag-bottom-left">
-            <span>💀</span> Decenas de Jefes
+            <span>💀</span> <span data-i18n="hero_tag_bosses">Decenas de Jefes</span>
           </div>
 
           <div class="phone-screen">
@@ -1075,9 +1136,9 @@
     <section id="features">
       <div class="section-container">
         <div class="section-header">
-          <span class="section-tag">Jugabilidad y Rendimiento</span>
-          <h2 class="section-title">Diseñado para la <span class="gradient-text">Velocidad y Adicción</span></h2>
-          <p class="section-desc">
+          <span class="section-tag" data-i18n="feat_tag">Jugabilidad y Rendimiento</span>
+          <h2 class="section-title" data-i18n-html="feat_title">Diseñado para la <span class="gradient-text">Velocidad y Adicción</span></h2>
+          <p class="section-desc" data-i18n="feat_desc">
             Sin esperas, sin pantallas de carga interminables ni menús complicados. Abre el juego y comienza a golpear en menos de 2 segundos.
           </p>
         </div>
@@ -1085,48 +1146,48 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon-box">👆</div>
-            <h3 class="feature-title">Mecánica One-Tap Pura</h3>
-            <p class="feature-text">
+            <h3 class="feature-title" data-i18n="feat_1_title">Mecánica One-Tap Pura</h3>
+            <p class="feature-text" data-i18n="feat_1_text">
               Un solo dedo es suficiente. Toca en el momento exacto para asestar el golpe definitivo. Calibrado con latencia táctil ultrabaja y respuesta inmediata.
             </p>
           </div>
 
           <div class="feature-card">
             <div class="feature-icon-box">🌌</div>
-            <h3 class="feature-title">3 Capítulos y Cientos de Niveles</h3>
-            <p class="feature-text">
+            <h3 class="feature-title" data-i18n="feat_2_title">3 Capítulos y Cientos de Niveles</h3>
+            <p class="feature-text" data-i18n="feat_2_text">
               Avanza a través de 3 grandes capítulos con 100 fases cada uno. Cada sección introduce nuevas trayectorias, trampas y combates decisivos contra jefes.
             </p>
           </div>
 
           <div class="feature-card">
             <div class="feature-icon-box">📅</div>
-            <h3 class="feature-title">Reto Diario y Rachas</h3>
-            <p class="feature-text">
+            <h3 class="feature-title" data-i18n="feat_3_title">Reto Diario y Rachas</h3>
+            <p class="feature-text" data-i18n="feat_3_text">
               Un nuevo desafío cada 24 horas. ¡Completa una racha de 7 días consecutivos superando el reto para conseguir grandes recompensas y puntos para el taller!
             </p>
           </div>
 
           <div class="feature-card">
             <div class="feature-icon-box">🎃</div>
-            <h3 class="feature-title">Eventos de Temporada</h3>
-            <p class="feature-text">
+            <h3 class="feature-title" data-i18n="feat_4_title">Eventos de Temporada</h3>
+            <p class="feature-text" data-i18n="feat_4_text">
               Disfruta de eventos temáticos con fondos exclusivos, bandas sonoras estacionales y enemigos especiales: Halloween, Navidad, San Valentín y más sorpresas.
             </p>
           </div>
 
           <div class="feature-card">
             <div class="feature-icon-box">👥</div>
-            <h3 class="feature-title">Modo Duelo: Hasta 12 Jugadores</h3>
-            <p class="feature-text">
+            <h3 class="feature-title" data-i18n="feat_5_title">Modo Duelo: Hasta 12 Jugadores</h3>
+            <p class="feature-text" data-i18n="feat_5_text">
               ¡Pásate el móvil y compite con amigos y familia! Juega con hasta 12 personas en el mismo dispositivo para averiguar quién tiene los mejores reflejos y llega más lejos.
             </p>
           </div>
 
           <div class="feature-card">
             <div class="feature-icon-box">☁️</div>
-            <h3 class="feature-title">Ranking Cloud en Tiempo Real</h3>
-            <p class="feature-text">
+            <h3 class="feature-title" data-i18n="feat_6_title">Ranking Cloud en Tiempo Real</h3>
+            <p class="feature-text" data-i18n="feat_6_text">
               Compite por la mejor puntuación de cada capítulo. Sincronización instantánea en la nube sin necesidad de registros engorrosos.
             </p>
           </div>
@@ -1138,36 +1199,36 @@
     <section id="modes">
       <div class="section-container">
         <div class="section-header">
-          <span class="section-tag">Variedad Arcade</span>
-          <h2 class="section-title">Modos de Juego para <span class="gradient-text">Cada Momento</span></h2>
-          <p class="section-desc">
+          <span class="section-tag" data-i18n="modes_tag">Variedad Arcade</span>
+          <h2 class="section-title" data-i18n-html="modes_title">Modos de Juego para <span class="gradient-text">Cada Momento</span></h2>
+          <p class="section-desc" data-i18n="modes_desc">
             Ya tengas 30 segundos en la parada del autobús o una hora de descanso, One Tap Strike! se adapta a ti.
           </p>
         </div>
 
         <div class="modes-showcase">
           <div class="modes-tabs">
-            <button class="mode-tab-btn active" onclick="switchModeTab('campana')">🌍 Campaña Principal</button>
-            <button class="mode-tab-btn" onclick="switchModeTab('diario')">📅 Reto Diario</button>
-            <button class="mode-tab-btn" onclick="switchModeTab('duelo')">⚔️ Modo Duelo</button>
-            <button class="mode-tab-btn" onclick="switchModeTab('temporadas')">❄️ Temporadas Festivas</button>
-            <span class="mode-tab-more" title="Desafíos normales, desafíos por puntos y eventos especiales">✨ ¡Y más...</span>
+            <button class="mode-tab-btn active" onclick="switchModeTab('campana', event)" data-i18n="tab_campana">🌍 Campaña Principal</button>
+            <button class="mode-tab-btn" onclick="switchModeTab('diario', event)" data-i18n="tab_diario">📅 Reto Diario</button>
+            <button class="mode-tab-btn" onclick="switchModeTab('duelo', event)" data-i18n="tab_duelo">⚔️ Modo Duelo</button>
+            <button class="mode-tab-btn" onclick="switchModeTab('temporadas', event)" data-i18n="tab_temporadas">❄️ Temporadas Festivas</button>
+            <span class="mode-tab-more" data-i18n="tab_more" data-i18n-attr="title:tab_more_title" title="Desafíos normales, desafíos por puntos y eventos especiales">✨ ¡Y más...</span>
           </div>
 
           <!-- Tab 1: Campaña -->
           <div class="mode-content-panel active" id="mode-campana">
             <div class="mode-info-col">
-              <h3>Campaña de 3 Capítulos</h3>
-              <p>
+              <h3 data-i18n="mode_1_h3">Campaña de 3 Capítulos</h3>
+              <p data-i18n="mode_1_p">
                 Un viaje emocionante dividido en 3 capítulos independientes con 100 niveles cada uno. Supera oleadas de dificultad creciente con enemigos acorazados, trayectorias helicoidales y combates épicos contra jefes colosales.
               </p>
               <ul class="mode-points-list">
-                <li><span class="bullet-icon">✓</span> 3 Capítulos y 300 niveles desafiantes</li>
-                <li><span class="bullet-icon">✓</span> Taller de mejoras: equípate con escudos, vidas adicionales y más</li>
-                <li><span class="bullet-icon">✓</span> Colección de más de 60 matamoscas únicos para desbloquear</li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_1_li1">3 Capítulos y 300 niveles desafiantes</span></li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_1_li2">Taller de mejoras: equípate con escudos, vidas adicionales y más</span></li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_1_li3">Colección de más de 60 matamoscas únicos para desbloquear</span></li>
               </ul>
               <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
-                <span class="gp-maintext">Jugar Campaña Gratis</span>
+                <span class="gp-maintext" data-i18n="mode_1_btn">Jugar Campaña Gratis</span>
               </a>
             </div>
             <div class="mode-preview-img-box">
@@ -1178,17 +1239,17 @@
           <!-- Tab 2: Reto Diario -->
           <div class="mode-content-panel" id="mode-diario">
             <div class="mode-info-col">
-              <h3>Reto Diario y Sistema de Rachas</h3>
-              <p>
+              <h3 data-i18n="mode_2_h3">Reto Diario y Sistema de Rachas</h3>
+              <p data-i18n="mode_2_p">
                 A las 00:00 UTC de cada día, el sistema genera una prueba exclusiva con condiciones y velocidad únicas. ¡Supera el desafío diario y mantén tu constancia para ganar premios cada vez mayores!
               </p>
               <ul class="mode-points-list">
-                <li><span class="bullet-icon">✓</span> Completa una racha de 7 días para conseguir grandes recompensas</li>
-                <li><span class="bullet-icon">✓</span> Reintentos siempre disponibles para que nunca pierdas tu racha</li>
-                <li><span class="bullet-icon">✓</span> Acumula puntos valiosos para desbloquear mejoras y nuevos matamoscas</li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_2_li1">Completa una racha de 7 días para conseguir grandes recompensas</span></li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_2_li2">Reintentos siempre disponibles para que nunca pierdas tu racha</span></li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_2_li3">Acumula puntos valiosos para desbloquear mejoras y nuevos matamoscas</span></li>
               </ul>
               <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
-                <span class="gp-maintext">Ver Reto de Hoy</span>
+                <span class="gp-maintext" data-i18n="mode_2_btn">Ver Reto de Hoy</span>
               </a>
             </div>
             <div class="mode-preview-img-box" onclick="openLightbox('assets/img/reto-diario-menu.webp')" style="cursor: pointer;">
@@ -1199,17 +1260,17 @@
           <!-- Tab 3: Duelo -->
           <div class="mode-content-panel" id="mode-duelo">
             <div class="mode-info-col">
-              <h3>Modo Duelo (Hasta 12 Jugadores)</h3>
-              <p>
+              <h3 data-i18n="mode_3_h3">Modo Duelo (Hasta 12 Jugadores)</h3>
+              <p data-i18n="mode_3_p">
                 ¡El modo fiesta definitivo! Reúne a tus amigos o juega en familia en un solo dispositivo. Pasaos el móvil por turnos para competir en una misma partida y descubrir quién aguanta más rondas, comete menos fallos y se corona campeón.
               </p>
               <ul class="mode-points-list">
-                <li><span class="bullet-icon">✓</span> Hasta 12 jugadores en el mismo teléfono o tablet</li>
-                <li><span class="bullet-icon">✓</span> 100% multijugador local sin gastar datos ni conexiones externas</li>
-                <li><span class="bullet-icon">✓</span> Piques asegurados y clasificación de la partida al instante</li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_3_li1">Hasta 12 jugadores en el mismo teléfono o tablet</span></li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_3_li2">100% multijugador local sin gastar datos ni conexiones externas</span></li>
+                <li><span class="bullet-icon">✓</span> <span data-i18n="mode_3_li3">Piques asegurados y clasificación de la partida al instante</span></li>
               </ul>
               <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
-                <span class="gp-maintext">Probar Modo Duelo</span>
+                <span class="gp-maintext" data-i18n="mode_3_btn">Probar Modo Duelo</span>
               </a>
             </div>
             <div class="mode-preview-img-box" onclick="openLightbox('assets/img/duelo-menu.webp')" style="cursor: pointer;">
@@ -1220,18 +1281,18 @@
           <!-- Tab 4: Temporadas -->
           <div class="mode-content-panel" id="mode-temporadas">
             <div class="mode-info-col">
-              <h3>Eventos de Temporada Exclusivos</h3>
-              <p>
+              <h3 data-i18n="mode_4_h3">Eventos de Temporada Exclusivos</h3>
+              <p data-i18n="mode_4_p">
                 Disfruta de eventos temáticos a lo largo del año con fondos exclusivos, bandas sonoras estacionales y enemigos especiales:
               </p>
               <ul class="mode-points-list">
-                <li><span class="bullet-icon">🎃</span> Halloween con criaturas y objetos encantados</li>
-                <li><span class="bullet-icon">❄️</span> Navidad con copos de nieve procedurales</li>
-                <li><span class="bullet-icon">💘</span> San Valentín para los enamorados (o no tan enamorados...)</li>
-                <li><span class="bullet-icon">✨</span> ¡Y muchas más sorpresas a lo largo de cada estación!</li>
+                <li><span class="bullet-icon">🎃</span> <span data-i18n="mode_4_li1">Halloween con criaturas y objetos encantados</span></li>
+                <li><span class="bullet-icon">❄️</span> <span data-i18n="mode_4_li2">Navidad con copos de nieve procedurales</span></li>
+                <li><span class="bullet-icon">💘</span> <span data-i18n="mode_4_li3">San Valentín para los enamorados (o no tan enamorados...)</span></li>
+                <li><span class="bullet-icon">✨</span> <span data-i18n="mode_4_li4">¡Y muchas más sorpresas a lo largo de cada estación!</span></li>
               </ul>
               <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
-                <span class="gp-maintext">Descubrir Temporadas</span>
+                <span class="gp-maintext" data-i18n="mode_4_btn">Descubrir Temporadas</span>
               </a>
             </div>
             <div class="mode-preview-img-box" onclick="openLightbox('assets/img/temporadas-menu.webp')" style="cursor: pointer;">
@@ -1246,9 +1307,9 @@
     <section id="gallery">
       <div class="section-container">
         <div class="section-header">
-          <span class="section-tag">Galería Visual</span>
-          <h2 class="section-title">Capturas del <span class="gradient-text">Juego en Vivo</span></h2>
-          <p class="section-desc">
+          <span class="section-tag" data-i18n="gal_tag">Galería Visual</span>
+          <h2 class="section-title" data-i18n-html="gal_title">Capturas del <span class="gradient-text">Juego en Vivo</span></h2>
+          <p class="section-desc" data-i18n="gal_desc">
             Haz clic en cualquier imagen para verla en pantalla completa.
           </p>
         </div>
@@ -1256,22 +1317,22 @@
         <div class="gallery-grid">
           <div class="gallery-item" onclick="openLightbox('assets/img/gallery-mosca.webp')">
             <img src="assets/img/gallery-mosca.webp" alt="Acción arcade clásica en One Tap Strike!">
-            <div class="gallery-caption">Acción Arcade Clásica</div>
+            <div class="gallery-caption" data-i18n="gal_cap_1">Acción Arcade Clásica</div>
           </div>
 
           <div class="gallery-item" onclick="openLightbox('assets/img/gallery-avispa.webp')">
             <img src="assets/img/gallery-avispa.webp" alt="Enfrentamiento contra avispa y enjambre">
-            <div class="gallery-caption">Reflejos y Precisión Extrema</div>
+            <div class="gallery-caption" data-i18n="gal_cap_2">Reflejos y Precisión Extrema</div>
           </div>
 
           <div class="gallery-item" onclick="openLightbox('assets/img/gallery-vertedero.webp')">
             <img src="assets/img/gallery-vertedero.webp" alt="Fase del vertedero con múltiples objetivos">
-            <div class="gallery-caption">Escenarios Únicos por Nivel</div>
+            <div class="gallery-caption" data-i18n="gal_cap_3">Escenarios Únicos por Nivel</div>
           </div>
 
           <div class="gallery-item" onclick="openLightbox('assets/img/gallery-microchip.webp')">
             <img src="assets/img/gallery-microchip.webp" alt="Fase cibernética con microchip corrupto">
-            <div class="gallery-caption">Capítulo Cibernético y Desafíos</div>
+            <div class="gallery-caption" data-i18n="gal_cap_4">Capítulo Cibernético y Desafíos</div>
           </div>
         </div>
       </div>
@@ -1281,22 +1342,22 @@
     <section id="vip">
       <div class="section-container">
         <div class="section-header">
-          <span class="section-tag">Comodidad Total</span>
-          <h2 class="section-title">Juega <span class="gold-gradient-text">A Tu Ritmo</span> y Sin Límites</h2>
+          <span class="section-tag" data-i18n="vip_tag">Comodidad Total</span>
+          <h2 class="section-title" data-i18n-html="vip_title">Juega <span class="gold-gradient-text">A Tu Ritmo</span> y Sin Límites</h2>
         </div>
 
         <div class="vip-offline-grid">
           <!-- Offline Card -->
           <div class="offline-card">
-            <span class="card-badge badge-cyan">📶 100% Sin Conexión</span>
-            <h3 style="font-size: 1.8rem; margin-bottom: 14px;">Diversión en Cualquier Lugar</h3>
-            <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+            <span class="card-badge badge-cyan" data-i18n="off_badge">📶 100% Sin Conexión</span>
+            <h3 style="font-size: 1.8rem; margin-bottom: 14px;" data-i18n="off_h3">Diversión en Cualquier Lugar</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;" data-i18n="off_p">
               ¿Viajas en metro, avión o estás en una zona sin cobertura? One Tap Strike! no te deja tirado: toda la campaña, los niveles y las partidas locales funcionan a la perfección sin consumir ni un solo mega de datos.
             </p>
             <ul class="mode-points-list">
-              <li><span class="bullet-icon">✓</span> Cero esperas de conexión</li>
-              <li><span class="bullet-icon">✓</span> Batería optimizada con aceleración GPU nativa</li>
-              <li><span class="bullet-icon">✓</span> Sincroniza tus récords cuando vuelvas a tener red</li>
+              <li><span class="bullet-icon">✓</span> <span data-i18n="off_li1">Cero esperas de conexión</span></li>
+              <li><span class="bullet-icon">✓</span> <span data-i18n="off_li2">Batería optimizada con aceleración GPU nativa</span></li>
+              <li><span class="bullet-icon">✓</span> <span data-i18n="off_li3">Sincroniza tus récords cuando vuelvas a tener red</span></li>
             </ul>
           </div>
 
@@ -1304,17 +1365,17 @@
           <div class="vip-card">
             <span class="card-badge badge-gold" style="display: inline-flex; align-items: center; gap: 8px;">
               <img src="assets/img/golden_fly.svg" width="18" height="18" alt="Mosca Dorada" style="vertical-align: middle;">
-              <span>Pase VIP Permanente</span>
+              <span data-i18n="vip_badge">Pase VIP Permanente</span>
             </span>
-            <h3 style="font-size: 1.8rem; margin-bottom: 14px;"><span class="gold-gradient-text">Experiencia Pura Sin Anuncios</span></h3>
-            <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+            <h3 style="font-size: 1.8rem; margin-bottom: 14px;" data-i18n-html="vip_h3"><span class="gold-gradient-text">Experiencia Pura Sin Anuncios</span></h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;" data-i18n="vip_p">
               Disfruta del juego en su máxima expresión. Un único pago económico para toda la vida a través de Google Play Billing:
             </p>
             <ul class="mode-points-list">
-              <li><span class="bullet-icon" style="color: var(--gold);">★</span> Eliminación total de anuncios</li>
-              <li><span class="bullet-icon" style="color: var(--gold);">★</span> Acceso instantáneo a todos los capítulos de la campaña</li>
-              <li><span class="bullet-icon" style="color: var(--gold);">★</span> Regalo de 20.000 puntos añadidos a tu saldo</li>
-              <li><span class="bullet-icon" style="color: var(--gold);">★</span> Corona dorada VIP exclusiva en tu perfil</li>
+              <li><span class="bullet-icon" style="color: var(--gold);">★</span> <span data-i18n="vip_li1">Eliminación total de anuncios</span></li>
+              <li><span class="bullet-icon" style="color: var(--gold);">★</span> <span data-i18n="vip_li2">Acceso instantáneo a todos los capítulos de la campaña</span></li>
+              <li><span class="bullet-icon" style="color: var(--gold);">★</span> <span data-i18n="vip_li3">Regalo de 20.000 puntos añadidos a tu saldo</span></li>
+              <li><span class="bullet-icon" style="color: var(--gold);">★</span> <span data-i18n="vip_li4">Corona dorada VIP exclusiva en tu perfil</span></li>
             </ul>
           </div>
         </div>
@@ -1325,8 +1386,8 @@
     <section>
       <div class="section-container">
         <div class="cta-banner">
-          <h2 class="cta-title">¿Tienes los reflejos más rápidos del mundo?</h2>
-          <p class="cta-desc">
+          <h2 class="cta-title" data-i18n="cta_title">¿Tienes los reflejos más rápidos del mundo?</h2>
+          <p class="cta-desc" data-i18n="cta_desc">
             Únete a miles de jugadores. Descarga One Tap Strike! gratis hoy mismo en Google Play Store y reclama tu puesto en la gloria arcade.
           </p>
           <div class="cta-buttons">
@@ -1338,7 +1399,7 @@
                 <path fill="#ea4335" d="M465 228.3L385.4 183l-60.1 51.3 60.1 51.3 79.6-45.3c14.2-8.1 22.8-23.2 22.8-39.6-.1-16.5-8.7-31.5-22.8-39.7z"/>
               </svg>
               <div class="gp-text-col">
-                <span class="gp-subtext">Instalar ahora en</span>
+                <span class="gp-subtext" data-i18n="cta_btn_sub">Instalar ahora en</span>
                 <span class="gp-maintext">Google Play Store</span>
               </div>
             </a>
@@ -1356,37 +1417,37 @@
           <img src="favicon.png" alt="Logo" style="width: 38px; height: 38px; border-radius: 10px;">
           <span style="font-size: 1.25rem; font-weight: 800; color: #fff;">One Tap Strike!</span>
         </div>
-        <p>
+        <p data-i18n="foot_desc">
           Videojuego arcade casual para dispositivos móviles Android. Diseñado y desarrollado con pasión por José Luis González Valero (JLGvalero).
         </p>
       </div>
 
       <div class="footer-col">
-        <h4>Navegación</h4>
+        <h4 data-i18n="foot_nav_title">Navegación</h4>
         <ul>
-          <li><a href="#hero">Inicio</a></li>
-          <li><a href="#features">Características</a></li>
-          <li><a href="#modes">Modos de Juego</a></li>
-          <li><a href="#gallery">Galería</a></li>
-          <li><a href="#vip">Pase VIP</a></li>
+          <li><a href="#hero" data-i18n="foot_nav_home">Inicio</a></li>
+          <li><a href="#features" data-i18n="foot_nav_features">Características</a></li>
+          <li><a href="#modes" data-i18n="foot_nav_modes">Modos de Juego</a></li>
+          <li><a href="#gallery" data-i18n="foot_nav_gallery">Galería</a></li>
+          <li><a href="#vip" data-i18n="foot_nav_vip">Pase VIP</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Legal y Soporte</h4>
+        <h4 data-i18n="foot_legal_title">Legal y Soporte</h4>
         <ul>
-          <li><a href="https://ajopollo.github.io/onetapstrike-privacy/" target="_blank" rel="noopener">Política de Privacidad</a></li>
-          <li><a href="app-ads.txt" target="_blank">Verificación app-ads.txt</a></li>
-          <li><a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener">Ficha de Google Play</a></li>
+          <li><a href="https://ajopollo.github.io/onetapstrike-privacy/" target="_blank" rel="noopener" data-i18n="foot_privacy">Política de Privacidad</a></li>
+          <li><a href="app-ads.txt" target="_blank" data-i18n="foot_ads">Verificación app-ads.txt</a></li>
+          <li><a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" data-i18n="foot_play">Ficha de Google Play</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <div>
+      <div data-i18n-html="foot_copy">
         &copy; 2026 <strong>One Tap Strike!</strong> — Desarrollado por <strong>José Luis González Valero</strong>. Todos los derechos reservados.
       </div>
-      <div>
+      <div data-i18n="foot_pegi">
         Clasificación IARC PEGI 3 • Apto para todos los públicos
       </div>
     </div>
@@ -1399,6 +1460,428 @@
   </div>
 
   <script>
+    // Translation dictionary for ES, EN, and PT
+    const TRANSLATIONS = {
+      es: {
+        page_title: "One Tap Strike! - Juego Arcade Móvil Oficial | Google Play",
+        meta_desc: "One Tap Strike! es un juego arcade casual de acción frenética y reflejos puros para Android. Supera 3 capítulos repletos de cientos de niveles, retos diarios, eventos estacionales y compite en el ranking mundial. ¡Descárgalo gratis en Google Play!",
+        og_title: "One Tap Strike! - Acción Arcade de Reflejos en Android",
+        og_desc: "Domina 3 capítulos con cientos de niveles, retos diarios y compite en el ranking mundial. ¡Descárgalo gratis en Google Play Store!",
+        tw_title: "One Tap Strike! - Arcade Móvil Oficial",
+        tw_desc: "Reflejos puros. Acción instantánea. Un solo toque. Descárgalo gratis en Google Play.",
+        nav_features: "Características",
+        nav_modes: "Modos de Juego",
+        nav_gallery: "Capturas",
+        nav_vip: "Pase VIP",
+        nav_privacy: "Privacidad",
+        nav_download: "Descargar Gratis",
+        hero_badge: "¡YA EN GOOGLE PLAY!",
+        hero_title: 'Reflejos Puros.<br><span class="gradient-text">Acción Instantánea.</span><br>Un Solo Toque.',
+        hero_subtitle: "El arcade casual más vertiginoso de Android. Pon a prueba tu destreza, golpea con precisión milimétrica, supera cientos de niveles a lo largo de 3 capítulos y conquista el podio mundial.",
+        hero_cta_available: "Disponible en",
+        hero_cta_explore: "Explorar Modos",
+        hero_pill_pegi: "PEGI 3 / Todo Público",
+        hero_pill_swatters: "+60 Matamoscas Únicos",
+        hero_pill_offline: "100% Jugable Offline",
+        hero_pill_cloud: "Ranking Cloud Global",
+        hero_tag_levels: "Cientos de Niveles",
+        hero_tag_leaderboards: "Marcadores en Vivo",
+        hero_tag_bosses: "Decenas de Jefes",
+        feat_tag: "Jugabilidad y Rendimiento",
+        feat_title: 'Diseñado para la <span class="gradient-text">Velocidad y Adicción</span>',
+        feat_desc: "Sin esperas, sin pantallas de carga interminables ni menús complicados. Abre el juego y comienza a golpear en menos de 2 segundos.",
+        feat_1_title: "Mecánica One-Tap Pura",
+        feat_1_text: "Un solo dedo es suficiente. Toca en el momento exacto para asestar el golpe definitivo. Calibrado con latencia táctil ultrabaja y respuesta inmediata.",
+        feat_2_title: "3 Capítulos y Cientos de Niveles",
+        feat_2_text: "Avanza a través de 3 grandes capítulos con 100 fases cada uno. Cada sección introduce nuevas trayectorias, trampas y combates decisivos contra jefes.",
+        feat_3_title: "Reto Diario y Rachas",
+        feat_3_text: "Un nuevo desafío cada 24 horas. ¡Completa una racha de 7 días consecutivos superando el reto para conseguir grandes recompensas y puntos para el taller!",
+        feat_4_title: "Eventos de Temporada",
+        feat_4_text: "Disfruta de eventos temáticos con fondos exclusivos, bandas sonoras estacionales y enemigos especiales: Halloween, Navidad, San Valentín y más sorpresas.",
+        feat_5_title: "Modo Duelo: Hasta 12 Jugadores",
+        feat_5_text: "¡Pásate el móvil y compite con amigos y familia! Juega con hasta 12 personas en el mismo dispositivo para averiguar quién tiene los mejores reflejos y llega más lejos.",
+        feat_6_title: "Ranking Cloud en Tiempo Real",
+        feat_6_text: "Compite por la mejor puntuación de cada capítulo. Sincronización instantánea en la nube sin necesidad de registros engorrosos.",
+        modes_tag: "Variedad Arcade",
+        modes_title: 'Modos de Juego para <span class="gradient-text">Cada Momento</span>',
+        modes_desc: "Ya tengas 30 segundos en la parada del autobús o una hora de descanso, One Tap Strike! se adapta a ti.",
+        tab_campana: "🌍 Campaña Principal",
+        tab_diario: "📅 Reto Diario",
+        tab_duelo: "⚔️ Modo Duelo",
+        tab_temporadas: "❄️ Temporadas Festivas",
+        tab_more: "✨ ¡Y más...",
+        tab_more_title: "Desafíos normales, desafíos por puntos y eventos especiales",
+        mode_1_h3: "Campaña de 3 Capítulos",
+        mode_1_p: "Un viaje emocionante dividido en 3 capítulos independientes con 100 niveles cada uno. Supera oleadas de dificultad creciente con enemigos acorazados, trayectorias helicoidales y combates épicos contra jefes colosales.",
+        mode_1_li1: "3 Capítulos y 300 niveles desafiantes",
+        mode_1_li2: "Taller de mejoras: equípate con escudos, vidas adicionales y más",
+        mode_1_li3: "Colección de más de 60 matamoscas únicos para desbloquear",
+        mode_1_btn: "Jugar Campaña Gratis",
+        mode_2_h3: "Reto Diario y Sistema de Rachas",
+        mode_2_p: "A las 00:00 UTC de cada día, el sistema genera una prueba exclusiva con condiciones y velocidad únicas. ¡Supera el desafío diario y mantén tu constancia para ganar premios cada vez mayores!",
+        mode_2_li1: "Completa una racha de 7 días para conseguir grandes recompensas",
+        mode_2_li2: "Reintentos siempre disponibles para que nunca pierdas tu racha",
+        mode_2_li3: "Acumula puntos valiosos para desbloquear mejoras y nuevos matamoscas",
+        mode_2_btn: "Ver Reto de Hoy",
+        mode_3_h3: "Modo Duelo (Hasta 12 Jugadores)",
+        mode_3_p: "¡El modo fiesta definitivo! Reúne a tus amigos o juega en familia en un solo dispositivo. Pasaos el móvil por turnos para competir en una misma partida y descubrir quién aguanta más rondas, comete menos fallos y se corona campeón.",
+        mode_3_li1: "Hasta 12 jugadores en el mismo teléfono o tablet",
+        mode_3_li2: "100% multijugador local sin gastar datos ni conexiones externas",
+        mode_3_li3: "Piques asegurados y clasificación de la partida al instante",
+        mode_3_btn: "Probar Modo Duelo",
+        mode_4_h3: "Eventos de Temporada Exclusivos",
+        mode_4_p: "Disfruta de eventos temáticos a lo largo del año con fondos exclusivos, bandas sonoras estacionales y enemigos especiales:",
+        mode_4_li1: "Halloween con criaturas y objetos encantados",
+        mode_4_li2: "Navidad con copos de nieve procedurales",
+        mode_4_li3: "San Valentín para los enamorados (o no tan enamorados...)",
+        mode_4_li4: "¡Y muchas más sorpresas a lo largo de cada estación!",
+        mode_4_btn: "Descubrir Temporadas",
+        gal_tag: "Galería Visual",
+        gal_title: 'Capturas del <span class="gradient-text">Juego en Vivo</span>',
+        gal_desc: "Haz clic en cualquier imagen para verla en pantalla completa.",
+        gal_cap_1: "Acción Arcade Clásica",
+        gal_cap_2: "Reflejos y Precisión Extrema",
+        gal_cap_3: "Escenarios Únicos por Nivel",
+        gal_cap_4: "Capítulo Cibernético y Desafíos",
+        vip_tag: "Comodidad Total",
+        vip_title: 'Juega <span class="gold-gradient-text">A Tu Ritmo</span> y Sin Límites',
+        off_badge: "📶 100% Sin Conexión",
+        off_h3: "Diversión en Cualquier Lugar",
+        off_p: "¿Viajas en metro, avión o estás en una zona sin cobertura? One Tap Strike! no te deja tirado: toda la campaña, los niveles y las partidas locales funcionan a la perfección sin consumir ni un solo mega de datos.",
+        off_li1: "Cero esperas de conexión",
+        off_li2: "Batería optimizada con aceleración GPU nativa",
+        off_li3: "Sincroniza tus récords cuando vuelvas a tener red",
+        vip_badge: "Pase VIP Permanente",
+        vip_h3: '<span class="gold-gradient-text">Experiencia Pura Sin Anuncios</span>',
+        vip_p: "Disfruta del juego en su máxima expresión. Un único pago económico para toda la vida a través de Google Play Billing:",
+        vip_li1: "Eliminación total de anuncios",
+        vip_li2: "Acceso instantáneo a todos los capítulos de la campaña",
+        vip_li3: "Regalo de 20.000 puntos añadidos a tu saldo",
+        vip_li4: "Corona dorada VIP exclusiva en tu perfil",
+        cta_title: "¿Tienes los reflejos más rápidos del mundo?",
+        cta_desc: "Únete a miles de jugadores. Descarga One Tap Strike! gratis hoy mismo en Google Play Store y reclama tu puesto en la gloria arcade.",
+        cta_btn_sub: "Instalar ahora en",
+        foot_desc: "Videojuego arcade casual para dispositivos móviles Android. Diseñado y desarrollado con pasión por José Luis González Valero (JLGvalero).",
+        foot_nav_title: "Navegación",
+        foot_nav_home: "Inicio",
+        foot_nav_features: "Características",
+        foot_nav_modes: "Modos de Juego",
+        foot_nav_gallery: "Galería",
+        foot_nav_vip: "Pase VIP",
+        foot_legal_title: "Legal y Soporte",
+        foot_privacy: "Política de Privacidad",
+        foot_ads: "Verificación app-ads.txt",
+        foot_play: "Ficha de Google Play",
+        foot_copy: '&copy; 2026 <strong>One Tap Strike!</strong> — Desarrollado por <strong>José Luis González Valero</strong>. Todos los derechos reservados.',
+        foot_pegi: "Clasificación IARC PEGI 3 • Apto para todos los públicos"
+      },
+      en: {
+        page_title: "One Tap Strike! - Official Mobile Arcade Game | Google Play",
+        meta_desc: "One Tap Strike! is a fast-paced casual arcade reflex game for Android. Conquer 3 chapters with hundreds of levels, daily challenges, seasonal events, and compete on the global leaderboard. Download free on Google Play!",
+        og_title: "One Tap Strike! - Fast-Paced Reflex Arcade on Android",
+        og_desc: "Master 3 chapters with hundreds of levels, daily challenges, and battle on the global leaderboard. Download free on Google Play Store!",
+        tw_title: "One Tap Strike! - Official Mobile Arcade",
+        tw_desc: "Pure reflexes. Instant action. One single tap. Download free on Google Play.",
+        nav_features: "Features",
+        nav_modes: "Game Modes",
+        nav_gallery: "Gallery",
+        nav_vip: "VIP Pass",
+        nav_privacy: "Privacy",
+        nav_download: "Download Free",
+        hero_badge: "NOW ON GOOGLE PLAY!",
+        hero_title: 'Pure Reflexes.<br><span class="gradient-text">Instant Action.</span><br>One Single Tap.',
+        hero_subtitle: "The most thrilling casual arcade on Android. Test your skills, strike with pinpoint precision, conquer hundreds of levels across 3 chapters, and dominate the global leaderboard.",
+        hero_cta_available: "Get it on",
+        hero_cta_explore: "Explore Modes",
+        hero_pill_pegi: "PEGI 3 / All Ages",
+        hero_pill_swatters: "+60 Unique Swatters",
+        hero_pill_offline: "100% Offline Playable",
+        hero_pill_cloud: "Global Cloud Leaderboard",
+        hero_tag_levels: "Hundreds of Levels",
+        hero_tag_leaderboards: "Live Leaderboards",
+        hero_tag_bosses: "Dozens of Bosses",
+        feat_tag: "Gameplay & Performance",
+        feat_title: 'Built for <span class="gradient-text">Speed & Pure Fun</span>',
+        feat_desc: "No waiting, no endless loading screens, no complicated menus. Open the game and start striking in under 2 seconds.",
+        feat_1_title: "Pure One-Tap Mechanics",
+        feat_1_text: "One finger is all you need. Tap at the exact split-second to strike. Calibrated with ultra-low touch latency and instant response.",
+        feat_2_title: "3 Chapters & Hundreds of Levels",
+        feat_2_text: "Progress through 3 major chapters with 100 stages each. Every area introduces new flight patterns, hazards, and intense boss battles.",
+        feat_3_title: "Daily Challenge & Streaks",
+        feat_3_text: "A brand new challenge every 24 hours. Complete a 7-day winning streak to earn massive rewards and workshop points!",
+        feat_4_title: "Seasonal Events",
+        feat_4_text: "Enjoy festive seasonal events with exclusive backgrounds, seasonal soundtracks, and special enemies: Halloween, Christmas, Valentine's Day, and more.",
+        feat_5_title: "Duel Mode: Up to 12 Players",
+        feat_5_text: "Pass-and-play with friends and family! Play with up to 12 people on a single device to see who has the best reflexes and survives the longest.",
+        feat_6_title: "Real-Time Cloud Leaderboard",
+        feat_6_text: "Compete for the highest score in every chapter. Instant cloud synchronization without tedious sign-ups.",
+        modes_tag: "Arcade Variety",
+        modes_title: 'Game Modes for <span class="gradient-text">Every Moment</span>',
+        modes_desc: "Whether you have 30 seconds at the bus stop or an hour to unwind, One Tap Strike! fits your pace.",
+        tab_campana: "🌍 Main Campaign",
+        tab_diario: "📅 Daily Challenge",
+        tab_duelo: "⚔️ Duel Mode",
+        tab_temporadas: "❄️ Festive Seasons",
+        tab_more: "✨ & more...",
+        tab_more_title: "Standard challenges, score challenges, and special events",
+        mode_1_h3: "3-Chapter Campaign",
+        mode_1_p: "An exciting journey across 3 standalone chapters with 100 levels each. Conquer waves of escalating challenge with armored targets, spiral flight paths, and epic boss showdowns.",
+        mode_1_li1: "3 Chapters and 300 challenging levels",
+        mode_1_li2: "Workshop upgrades: equip shields, extra lives, and more",
+        mode_1_li3: "Collection of +60 unique swatters to unlock",
+        mode_1_btn: "Play Campaign Free",
+        mode_2_h3: "Daily Challenge & Streak System",
+        mode_2_p: "Every day at 00:00 UTC, a unique trial is generated with custom speed and modifiers. Beat the daily challenge and keep your streak alive for ever-growing rewards!",
+        mode_2_li1: "Complete a 7-day streak to unlock massive rewards",
+        mode_2_li2: "Retries always available so you never lose your streak",
+        mode_2_li3: "Earn valuable points to unlock upgrades and new swatters",
+        mode_2_btn: "View Today's Challenge",
+        mode_3_h3: "Duel Mode (Up to 12 Players)",
+        mode_3_p: "The ultimate party mode! Gather friends or family around a single device. Pass the phone turn by turn in the same match to see who lasts the longest, makes fewer mistakes, and takes the crown.",
+        mode_3_li1: "Up to 12 players on the same phone or tablet",
+        mode_3_li2: "100% local multiplayer without using data or external connections",
+        mode_3_li3: "Guaranteed rivalries and instant match standings",
+        mode_3_btn: "Try Duel Mode",
+        mode_4_h3: "Exclusive Seasonal Events",
+        mode_4_p: "Enjoy festive seasonal events throughout the year with exclusive backgrounds, seasonal soundtracks, and special enemies:",
+        mode_4_li1: "Halloween with haunted creatures and spooky themes",
+        mode_4_li2: "Christmas with procedural falling snowflakes",
+        mode_4_li3: "Valentine's Day for lovers (or not so lovers...)",
+        mode_4_li4: "And many more surprises across each season!",
+        mode_4_btn: "Discover Seasons",
+        gal_tag: "Visual Gallery",
+        gal_title: 'Screenshots of <span class="gradient-text">Live Gameplay</span>',
+        gal_desc: "Click any image to view in full screen.",
+        gal_cap_1: "Classic Arcade Action",
+        gal_cap_2: "Extreme Reflexes & Precision",
+        gal_cap_3: "Unique Stages Every Level",
+        gal_cap_4: "Cybernetic Chapter & Challenges",
+        vip_tag: "Total Freedom",
+        vip_title: 'Play <span class="gold-gradient-text">At Your Pace</span> Without Limits',
+        off_badge: "📶 100% Offline",
+        off_h3: "Fun Anywhere, Anytime",
+        off_p: "Commuting on the subway, on a flight, or in a zero-reception area? One Tap Strike! never leaves you hanging: all campaign levels and local matches run flawlessly without using a single byte of data.",
+        off_li1: "Zero connection waiting times",
+        off_li2: "Battery optimized with native GPU acceleration",
+        off_li3: "Sync your high scores whenever you reconnect",
+        vip_badge: "Lifetime VIP Pass",
+        vip_h3: '<span class="gold-gradient-text">Pure Ad-Free Experience</span>',
+        vip_p: "Experience the game at its finest. A single budget-friendly lifetime purchase via Google Play Billing:",
+        vip_li1: "Complete ad removal",
+        vip_li2: "Instant access to all campaign chapters",
+        vip_li3: "Bonus 20,000 points added to your balance",
+        vip_li4: "Exclusive VIP golden crown on your profile",
+        cta_title: "Do you have the world's fastest reflexes?",
+        cta_desc: "Join thousands of players. Download One Tap Strike! free today on Google Play Store and claim your place in arcade glory.",
+        cta_btn_sub: "Install now on",
+        foot_desc: "Casual arcade mobile game for Android devices. Designed and developed with passion by José Luis González Valero (JLGvalero).",
+        foot_nav_title: "Navigation",
+        foot_nav_home: "Home",
+        foot_nav_features: "Features",
+        foot_nav_modes: "Game Modes",
+        foot_nav_gallery: "Gallery",
+        foot_nav_vip: "VIP Pass",
+        foot_legal_title: "Legal & Support",
+        foot_privacy: "Privacy Policy",
+        foot_ads: "app-ads.txt Verification",
+        foot_play: "Google Play Listing",
+        foot_copy: '&copy; 2026 <strong>One Tap Strike!</strong> — Developed by <strong>José Luis González Valero</strong>. All rights reserved.',
+        foot_pegi: "IARC PEGI 3 Rating • Suitable for all audiences"
+      },
+      pt: {
+        page_title: "One Tap Strike! - Jogo Arcade Móvel Oficial | Google Play",
+        meta_desc: "One Tap Strike! é um jogo arcade casual de ação frenética e reflexos puros para Android. Supere 3 capítulos com centenas de níveis, desafios diários, eventos sazonais e dispute o ranking mundial. Baixe grátis no Google Play!",
+        og_title: "One Tap Strike! - Ação Arcade de Reflexos no Android",
+        og_desc: "Domine 3 capítulos com centenas de níveis, desafios diários e dispute o ranking mundial. Baixe grátis no Google Play Store!",
+        tw_title: "One Tap Strike! - Arcade Móvel Oficial",
+        tw_desc: "Reflexos puros. Ação instantânea. Um só toque. Baixe grátis no Google Play.",
+        nav_features: "Recursos",
+        nav_modes: "Modos de Jogo",
+        nav_gallery: "Galeria",
+        nav_vip: "Passe VIP",
+        nav_privacy: "Privacidade",
+        nav_download: "Baixar Grátis",
+        hero_badge: "JÁ NO GOOGLE PLAY!",
+        hero_title: 'Reflexos Puros.<br><span class="gradient-text">Ação Instantânea.</span><br>Um Só Toque.',
+        hero_subtitle: "O arcade casual mais eletrizante do Android. Teste sua destreza, golpeie com precisão milimétrica, supere centenas de níveis em 3 capítulos e conquiste o pódio mundial.",
+        hero_cta_available: "Disponível no",
+        hero_cta_explore: "Explorar Modos",
+        hero_pill_pegi: "PEGI 3 / Livre",
+        hero_pill_swatters: "+60 Mata-Moscas Únicos",
+        hero_pill_offline: "100% Jogável Offline",
+        hero_pill_cloud: "Ranking Cloud Global",
+        hero_tag_levels: "Centenas de Níveis",
+        hero_tag_leaderboards: "Placares ao Vivo",
+        hero_tag_bosses: "Dezenas de Chefões",
+        feat_tag: "Jogabilidade e Desempenho",
+        feat_title: 'Projetado para <span class="gradient-text">Velocidade e Vício Bom</span>',
+        feat_desc: "Sem espera, sem telas de carregamento infinitas nem menus complicados. Abra o jogo e comece a acertar em menos de 2 segundos.",
+        feat_1_title: "Mecânica One-Tap Pura",
+        feat_1_text: "Apenas um dedo é suficiente. Toque no momento exato para dar o golpe definitivo. Calibrado com latência de toque ultrabaixa e resposta instantânea.",
+        feat_2_title: "3 Capítulos e Centenas de Níveis",
+        feat_2_text: "Avance por 3 grandes capítulos com 100 fases cada. Cada seção traz novas trajetórias, armadilhas e batalhas decisivas contra chefões.",
+        feat_3_title: "Desafio Diário e Sequências",
+        feat_3_text: "Um novo desafio a cada 24 horas. Complete uma sequência de 7 dias consecutivos vencendo o desafio para ganhar grandes recompensas e pontos para a oficina!",
+        feat_4_title: "Eventos de Temporada",
+        feat_4_text: "Aproveite eventos temáticos com cenários exclusivos, trilhas sonoras sazonais e inimigos especiais: Halloween, Natal, Dia dos Namorados e mais surpresas.",
+        feat_5_title: "Modo Duelo: Até 12 Jogadores",
+        feat_5_text: "Passe o celular e dispute com amigos e família! Jogue com até 12 pessoas no mesmo dispositivo para descobrir quem tem os melhores reflexos e vai mais longe.",
+        feat_6_title: "Ranking Cloud em Tempo Real",
+        feat_6_text: "Dispute a pontuação máxima de cada capítulo. Sincronização instantânea na nuvem sem cadastros complicados.",
+        modes_tag: "Variedade Arcade",
+        modes_title: 'Modos de Jogo para <span class="gradient-text">Cada Momento</span>',
+        modes_desc: "Quer você tenha 30 segundos no ponto de ônibus ou uma hora de descanso, One Tap Strike! se adapta a você.",
+        tab_campana: "🌍 Campanha Principal",
+        tab_diario: "📅 Desafio Diário",
+        tab_duelo: "⚔️ Modo Duelo",
+        tab_temporadas: "❄️ Temporadas Festivas",
+        tab_more: "✨ E mais...",
+        tab_more_title: "Desafios normais, desafios por pontos e eventos especiais",
+        mode_1_h3: "Campanha de 3 Capítulos",
+        mode_1_p: "Uma jornada emocionante dividida em 3 capítulos independentes com 100 níveis cada. Supere ondas de dificuldade crescente com inimigos blindados, trajetórias helicoidais e batalhas épicas contra chefões colossais.",
+        mode_1_li1: "3 Capítulos e 300 níveis desafiadores",
+        mode_1_li2: "Oficina de melhorias: equipe escudos, vidas extras e muito mais",
+        mode_1_li3: "Coleção de mais de 60 mata-moscas exclusivos para desbloquear",
+        mode_1_btn: "Jogar Campanha Grátis",
+        mode_2_h3: "Desafio Diário e Sistema de Sequências",
+        mode_2_p: "Às 00:00 UTC de cada dia, uma prova exclusiva é gerada com velocidade e condições únicas. Supere o desafio diário e mantenha sua constância para conquistar prêmios cada vez maiores!",
+        mode_2_li1: "Complete uma sequência de 7 dias para desbloquear grandes recompensas",
+        mode_2_li2: "Tentativas sempre disponíveis para você nunca perder sua sequência",
+        mode_2_li3: "Acumule pontos valiosos para desbloquear melhorias e novos mata-moscas",
+        mode_2_btn: "Ver Desafio de Hoje",
+        mode_3_h3: "Modo Duelo (Até 12 Jogadores)",
+        mode_3_p: "O modo festa definitivo! Reúna amigos ou jogue em família em um único aparelho. Passem o celular por turnos na mesma partida para descobrir quem aguenta mais rodadas, erra menos e é coroado campeão.",
+        mode_3_li1: "Até 12 jogadores no mesmo celular ou tablet",
+        mode_3_li2: "100% multiplayer local sem gastar dados nem conexões externas",
+        mode_3_li3: "Rivalidade garantida e classificação da partida na hora",
+        mode_3_btn: "Experimentar Modo Duelo",
+        mode_4_h3: "Eventos de Temporada Exclusivos",
+        mode_4_p: "Aproveite eventos temáticos ao longo do ano com cenários exclusivos, trilhas sonoras sazonais e inimigos especiais:",
+        mode_4_li1: "Halloween com criaturas assustadoras e temas mágicos",
+        mode_4_li2: "Natal com flocos de neve procedurais",
+        mode_4_li3: "Dia dos Namorados para apaixonados (ou nem tanto...)",
+        mode_4_li4: "E muitas outras surpresas ao longo de cada estação!",
+        mode_4_btn: "Descobrir Temporadas",
+        gal_tag: "Galeria Visual",
+        gal_title: 'Capturas do <span class="gradient-text">Jogo em Ação</span>',
+        gal_desc: "Clique em qualquer imagem para ver em tela cheia.",
+        gal_cap_1: "Ação Arcade Clássica",
+        gal_cap_2: "Reflexos e Precisão Extrema",
+        gal_cap_3: "Cenários Únicos por Nivel",
+        gal_cap_4: "Capítulo Cibernético e Desafios",
+        vip_tag: "Liberdade Total",
+        vip_title: 'Jogue <span class="gold-gradient-text">No Seu Ritmo</span> e Sem Limites',
+        off_badge: "📶 100% Sem Conexão",
+        off_h3: "Diversão em Qualquer Lugar",
+        off_p: "Viajando de metrô, avião ou em uma área sem sinal? One Tap Strike! nunca deixa você na mão: toda a campanha, os níveis e as partidas locais funcionam perfeitamente sem gastar nenhum dado.",
+        off_li1: "Zero espera de conexão",
+        off_li2: "Bateria otimizada com aceleração por GPU nativa",
+        off_li3: "Sincronize seus recordes assim que reconectar",
+        vip_badge: "Passe VIP Vitalício",
+        vip_h3: '<span class="gold-gradient-text">Experiência Pura Sem Anúncios</span>',
+        vip_p: "Aproveite o jogo no seu ápice. Um único pagamento acessível para a vida toda via Google Play Billing:",
+        vip_li1: "Remoção total de anúncios",
+        vip_li2: "Acesso instantâneo a todos os capítulos da campanha",
+        vip_li3: "Bônus de 20.000 pontos adicionados ao seu saldo",
+        vip_li4: "Coroa dourada VIP exclusiva no seu perfil",
+        cta_title: "Você tem os reflexos mais rápidos do mundo?",
+        cta_desc: "Junte-se a milhares de jogadores. Baixe One Tap Strike! grátis hoje no Google Play Store e garanta seu lugar na glória arcade.",
+        cta_btn_sub: "Instalar agora no",
+        foot_desc: "Jogo arcade casual para dispositivos móveis Android. Criado e desenvolvido com dedicação por José Luis González Valero (JLGvalero).",
+        foot_nav_title: "Navegação",
+        foot_nav_home: "Início",
+        foot_nav_features: "Recursos",
+        foot_nav_modes: "Modos de Jogo",
+        foot_nav_gallery: "Galeria",
+        foot_nav_vip: "Passe VIP",
+        foot_legal_title: "Legal e Suporte",
+        foot_privacy: "Política de Privacidade",
+        foot_ads: "Verificação app-ads.txt",
+        foot_play: "Página no Google Play",
+        foot_copy: '&copy; 2026 <strong>One Tap Strike!</strong> — Desenvolvido por <strong>José Luis González Valero</strong>. Todos os direitos reservados.',
+        foot_pegi: "Classificação IARC PEGI 3 • Livre para todos os públicos"
+      }
+    };
+
+    // Detect visitor language (defaulting to English for non-ES/PT countries)
+    function detectUserLanguage() {
+      const saved = localStorage.getItem('ots_lang');
+      if (saved && ['es', 'en', 'pt'].includes(saved)) {
+        return saved;
+      }
+      const browserLanguages = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+      for (const lang of browserLanguages) {
+        if (!lang) continue;
+        const l = lang.toLowerCase();
+        if (l.startsWith('pt')) return 'pt';
+        if (l.startsWith('es')) return 'es';
+        if (l.startsWith('en')) return 'en';
+      }
+      return 'en';
+    }
+
+    // Set page language and update DOM
+    function setLanguage(lang) {
+      if (!TRANSLATIONS[lang]) lang = 'en';
+      localStorage.setItem('ots_lang', lang);
+      document.documentElement.lang = lang;
+
+      const t = TRANSLATIONS[lang];
+
+      // Metadata
+      if (t.page_title) document.title = t.page_title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && t.meta_desc) metaDesc.setAttribute('content', t.meta_desc);
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle && t.og_title) ogTitle.setAttribute('content', t.og_title);
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc && t.og_desc) ogDesc.setAttribute('content', t.og_desc);
+      const twTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twTitle && t.tw_title) twTitle.setAttribute('content', t.tw_title);
+      const twDesc = document.querySelector('meta[name="twitter:description"]');
+      if (twDesc && t.tw_desc) twDesc.setAttribute('content', t.tw_desc);
+
+      // Text elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) {
+          el.textContent = t[key];
+        }
+      });
+
+      // HTML elements
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (t[key] !== undefined) {
+          el.innerHTML = t[key];
+        }
+      });
+
+      // Attributes
+      document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+        const spec = el.getAttribute('data-i18n-attr');
+        const [attr, key] = spec.split(':');
+        if (attr && key && t[key] !== undefined) {
+          el.setAttribute(attr, t[key]);
+        }
+      });
+
+      // Update selector buttons active class
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // Initialize language on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const initialLang = detectUserLanguage();
+      setLanguage(initialLang);
+    });
+
     // Mobile navigation toggle
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
@@ -1413,11 +1896,14 @@
     }
 
     // Game modes tabs switcher
-    function switchModeTab(tabId) {
+    function switchModeTab(tabId, ev) {
       document.querySelectorAll('.mode-tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.mode-content-panel').forEach(panel => panel.classList.remove('active'));
 
-      event.currentTarget.classList.add('active');
+      const trigger = (ev && ev.currentTarget) ? ev.currentTarget : (window.event ? window.event.currentTarget : null);
+      if (trigger) {
+        trigger.classList.add('active');
+      }
       const targetPanel = document.getElementById('mode-' + tabId);
       if (targetPanel) {
         targetPanel.classList.add('active');
