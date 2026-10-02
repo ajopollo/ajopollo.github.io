@@ -611,6 +611,25 @@
       border-color: var(--cyan);
       color: var(--cyan);
     }
+    .mode-tab-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      border: 1px dashed rgba(255, 255, 255, 0.20);
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.03);
+      cursor: default;
+      transition: var(--transition-smooth);
+    }
+    .mode-tab-more:hover {
+      color: var(--cyan);
+      border-color: rgba(0, 240, 255, 0.45);
+      background: rgba(0, 240, 255, 0.08);
+    }
 
     .mode-content-panel {
       display: none;
@@ -1133,6 +1152,7 @@
             <button class="mode-tab-btn" onclick="switchModeTab('diario')">📅 Reto Diario</button>
             <button class="mode-tab-btn" onclick="switchModeTab('duelo')">⚔️ Modo Duelo</button>
             <button class="mode-tab-btn" onclick="switchModeTab('temporadas')">❄️ Temporadas Festivas</button>
+            <span class="mode-tab-more" title="Desafíos normales, desafíos por puntos y eventos especiales">✨ ¡Y más...</span>
           </div>
 
           <!-- Tab 1: Campaña -->
