@@ -465,15 +465,20 @@
       animation: float-tag 4s ease-in-out infinite alternate;
       z-index: 2;
     }
-    .tag-left {
-      top: 18%;
-      left: -32px;
+    .tag-left, .tag-top-left {
+      top: 14%;
+      left: -34px;
       animation-delay: 0s;
     }
-    .tag-right {
-      bottom: 22%;
-      right: -36px;
-      animation-delay: 1.8s;
+    .tag-right, .tag-mid-right {
+      top: 48%;
+      right: -38px;
+      animation-delay: 1.4s;
+    }
+    .tag-bottom-left {
+      bottom: 14%;
+      left: -30px;
+      animation-delay: 2.8s;
     }
     @keyframes float-tag {
       0% { transform: translateY(0); }
@@ -1031,11 +1036,14 @@
 
       <div class="hero-visual">
         <div class="phone-mockup-wrapper">
-          <div class="floating-card-tag tag-left">
+          <div class="floating-card-tag tag-top-left">
             <span>🔥</span> Cientos de Niveles
           </div>
-          <div class="floating-card-tag tag-right">
+          <div class="floating-card-tag tag-mid-right">
             <span>🏆</span> Marcadores en Vivo
+          </div>
+          <div class="floating-card-tag tag-bottom-left">
+            <span>💀</span> Decenas de Jefes
           </div>
 
           <div class="phone-screen">
