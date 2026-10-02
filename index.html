@@ -656,15 +656,31 @@
       border: 1px solid var(--border-glass);
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
       aspect-ratio: 16 / 10;
-      background: #000;
+      background: radial-gradient(circle at center, rgba(30, 41, 59, 0.7) 0%, rgba(7, 10, 20, 0.98) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
     .mode-preview-img-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.4s ease;
     }
-    .mode-preview-img-box:hover img {
+    .mode-preview-img-box img.vertical-menu-shot {
+      width: auto;
+      height: 92%;
+      max-width: 90%;
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      object-fit: contain;
+    }
+    .mode-preview-img-box:hover img.vertical-menu-shot {
+      transform: scale(1.05);
+    }
+    .mode-preview-img-box:hover img:not(.vertical-menu-shot) {
       transform: scale(1.04);
     }
 
@@ -1148,8 +1164,8 @@
                 <span class="gp-maintext">Ver Reto de Hoy</span>
               </a>
             </div>
-            <div class="mode-preview-img-box">
-              <img src="assets/img/daily_montage.webp" alt="Reto Diario con Racha de 7 Días de One Tap Strike!">
+            <div class="mode-preview-img-box" onclick="openLightbox('assets/img/reto-diario-menu.webp')" style="cursor: pointer;">
+              <img src="assets/img/reto-diario-menu.webp" alt="Menú del Reto Diario de One Tap Strike!" class="vertical-menu-shot">
             </div>
           </div>
 
@@ -1169,8 +1185,8 @@
                 <span class="gp-maintext">Probar Modo Duelo</span>
               </a>
             </div>
-            <div class="mode-preview-img-box">
-              <img src="assets/img/duel_montage.webp" alt="Modo Duelo hasta 12 jugadores de One Tap Strike!">
+            <div class="mode-preview-img-box" onclick="openLightbox('assets/img/duelo-menu.webp')" style="cursor: pointer;">
+              <img src="assets/img/duelo-menu.webp" alt="Menú del Modo Duelo hasta 12 jugadores" class="vertical-menu-shot">
             </div>
           </div>
 
@@ -1191,8 +1207,8 @@
                 <span class="gp-maintext">Descubrir Temporadas</span>
               </a>
             </div>
-            <div class="mode-preview-img-box">
-              <img src="assets/img/season_halloween.webp" alt="Temporada Halloween One Tap Strike!">
+            <div class="mode-preview-img-box" onclick="openLightbox('assets/img/temporadas-menu.webp')" style="cursor: pointer;">
+              <img src="assets/img/temporadas-menu.webp" alt="Menú de Eventos Temporales y Temporadas Festivas" class="vertical-menu-shot">
             </div>
           </div>
         </div>
