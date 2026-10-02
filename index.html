@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>One Tap Strike! - Juego Arcade Móvil Oficial | Google Play</title>
+  <meta name="description" content="One Tap Strike! es un juego arcade casual de acción frenética y reflejos puros para Android. Supera más de 40 mundos, retos diarios, eventos estacionales y compite en el ranking mundial. ¡Descárgalo gratis en Google Play!">
+  <meta name="keywords" content="One Tap Strike, juego arcade, android game, google play, reflejos, un toque, casual game, jlgvalero, ajopollo">
+  <meta name="author" content="José Luis González Valero (ajopollo)">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ajopollo.github.io/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ajopollo.github.io/">
+  <meta property="og:title" content="One Tap Strike! - Acción Arcade de Reflejos en Android">
+  <meta property="og:description" content="Domina más de 40 mundos, retos diarios y compite en el ranking mundial. ¡Descárgalo gratis en Google Play Store!">
+  <meta property="og:image" content="https://ajopollo.github.io/assets/img/icon-512.png">
+  <meta property="og:site_name" content="One Tap Strike!">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://ajopollo.github.io/">
+  <meta name="twitter:title" content="One Tap Strike! - Arcade Móvil Oficial">
+  <meta name="twitter:description" content="Reflejos puros. Acción instantánea. Un solo toque. Descárgalo gratis en Google Play.">
+  <meta name="twitter:image" content="https://ajopollo.github.io/assets/img/icon-512.png">
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/icon-512.png">
+  <meta name="theme-color" content="#070a14">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "One Tap Strike!",
+    "operatingSystem": "Android 8.0+",
+    "applicationCategory": "GameApplication",
+    "genre": "Arcade",
+    "author": {
+      "@type": "Person",
+      "name": "José Luis González Valero"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "downloadUrl": "https://play.google.com/store/apps/details?id=io.onetap.strike",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "ratingCount": "20"
+    },
+    "description": "Juego arcade móvil de reflejos y acción rápida para Android con retos diarios, 40 mundos y ranking en la nube."
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-dark: #070a14;
+      --bg-card: rgba(16, 23, 42, 0.72);
+      --bg-card-hover: rgba(24, 34, 61, 0.88);
+      --cyan: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --purple: #8b5cf6;
+      --purple-glow: rgba(139, 92, 246, 0.35);
+      --gold: #fbbf24;
+      --gold-glow: rgba(251, 191, 36, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border-glass: rgba(255, 255, 255, 0.10);
+      --border-glow: rgba(0, 240, 255, 0.28);
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-pill: 9999px;
+      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', 'Outfit', sans-serif;
+      --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #151c38 0%, #070a14 55%, #04060c 100%);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Ambient glow elements */
+    .ambient-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-top-left {
+      top: -150px;
+      left: -150px;
+      width: 480px;
+      height: 480px;
+      background: rgba(0, 240, 255, 0.15);
+    }
+    .glow-top-right {
+      top: 100px;
+      right: -120px;
+      width: 520px;
+      height: 520px;
+      background: rgba(139, 92, 246, 0.18);
+    }
+    .glow-mid {
+      top: 50%;
+      left: 30%;
+      width: 450px;
+      height: 450px;
+      background: rgba(251, 191, 36, 0.10);
+    }
+
+    /* Typography Utilities */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, var(--cyan) 50%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fef08a 0%, #fbbf24 60%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Header / Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(7, 10, 20, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-glass);
+      transition: var(--transition-smooth);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .nav-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px var(--cyan-glow);
+      transition: transform 0.3s ease;
+    }
+    .nav-brand:hover .nav-logo {
+      transform: scale(1.08) rotate(3deg);
+    }
+    .nav-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+    }
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .btn-nav-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--cyan) 0%, #00b4d8 100%);
+      color: #070a14;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      box-shadow: 0 4px 14px var(--cyan-glow);
+      transition: var(--transition-smooth);
+    }
+    .btn-nav-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(0, 240, 255, 0.55);
+      background: linear-gradient(135deg, #38f5ff 0%, #00c7f2 100%);
+    }
+
+    /* Mobile Menu Toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 48px;
+      z-index: 1;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: var(--radius-pill);
+      color: var(--cyan);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      width: fit-content;
+      animation: pulse-glow 3s infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.15); }
+      100% { box-shadow: 0 0 22px rgba(0, 240, 255, 0.40); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5.2vw, 3.8rem);
+      line-height: 1.08;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.65;
+    }
+
+    /* Hero CTAs */
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .btn-google-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 11px 22px;
+      text-decoration: none;
+      color: var(--text-main);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-google-play::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      transition: 0.6s ease;
+    }
+    .btn-google-play:hover::before {
+      left: 100%;
+    }
+    .btn-google-play:hover {
+      transform: translateY(-3px);
+      border-color: var(--cyan);
+      box-shadow: 0 12px 30px var(--cyan-glow);
+    }
+    .gp-icon-svg {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+    .gp-text-col {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .gp-subtext {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .gp-maintext {
+      font-size: 1.22rem;
+      font-weight: 800;
+      line-height: 1.1;
+      font-family: var(--font-display);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glass);
+      color: var(--text-main);
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* Trust highlights */
+    .hero-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-glass);
+    }
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .stat-icon {
+      font-size: 1.1rem;
+    }
+
+    /* Hero Mockup / Phone visual */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .phone-mockup-wrapper {
+      position: relative;
+      width: 290px;
+      max-width: 100%;
+      border-radius: 38px;
+      padding: 10px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 240, 255, 0.3) 100%);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 50px rgba(0, 240, 255, 0.25);
+      transform: perspective(1000px) rotateY(-8deg) rotateX(4deg);
+      transition: transform 0.5s ease;
+    }
+    .phone-mockup-wrapper:hover {
+      transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.03);
+    }
+    .phone-screen {
+      position: relative;
+      width: 100%;
+      border-radius: 30px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 9 / 19.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Floating tags on phone */
+    .floating-card-tag {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-glow);
+      border-radius: 12px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-main);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      animation: float-tag 4s ease-in-out infinite alternate;
+      z-index: 2;
+    }
+    .tag-left {
+      top: 18%;
+      left: -32px;
+      animation-delay: 0s;
+    }
+    .tag-right {
+      bottom: 22%;
+      right: -36px;
+      animation-delay: 1.8s;
+    }
+    @keyframes float-tag {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    /* Section Styles */
+    section {
+      position: relative;
+      padding: 90px 24px;
+      z-index: 1;
+    }
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+    }
+    .section-tag {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--cyan);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-title {
+      font-size: clamp(2rem, 3.6vw, 2.8rem);
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      box-shadow: 0 16px 36px rgba(0, 240, 255, 0.12);
+    }
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+    .feature-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: rgba(0, 240, 255, 0.10);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      margin-bottom: 22px;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover .feature-icon-box {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .feature-title {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .feature-text {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* Interactive Game Modes Showcase */
+    .modes-showcase {
+      background: rgba(11, 17, 33, 0.7);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+    .modes-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 16px;
+    }
+    .mode-tab-btn {
+      background: transparent;
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .mode-tab-btn.active, .mode-tab-btn:hover {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .mode-content-panel {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .mode-content-panel.active {
+      display: grid;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mode-info-col h3 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    .mode-info-col p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.65;
+    }
+    .mode-points-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .mode-points-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .mode-points-list li span.bullet-icon {
+      color: var(--cyan);
+      font-size: 1.1rem;
+    }
+    .mode-preview-img-box {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-glass);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+      aspect-ratio: 16 / 10;
+      background: #000;
+    }
+    .mode-preview-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .mode-preview-img-box:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Gallery Section */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-glass);
+      background: #000;
+      aspect-ratio: 9 / 16;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 20px;
+      background: linear-gradient(180deg, transparent 0%, rgba(7, 10, 20, 0.95) 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transform: translateY(10px);
+      opacity: 0.9;
+      transition: var(--transition-smooth);
+    }
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* VIP & Offline Banner */
+    .vip-offline-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .vip-card, .offline-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .vip-card {
+      border-color: rgba(251, 191, 36, 0.35);
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, rgba(16, 23, 42, 0.8) 100%);
+    }
+    .vip-card:hover {
+      box-shadow: 0 16px 40px var(--gold-glow);
+    }
+    .card-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+    .badge-gold {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+    .badge-cyan {
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+    }
+
+    /* High Energy CTA Banner */
+    .cta-banner {
+      background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0f172a 70%, #070a14 100%);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 64px 32px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 60px rgba(0, 240, 255, 0.18);
+      overflow: hidden;
+    }
+    .cta-title {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      margin-bottom: 16px;
+    }
+    .cta-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    footer {
+      background: #04060c;
+      border-top: 1px solid var(--border-glass);
+      padding: 60px 24px 36px;
+      color: var(--text-dim);
+      font-size: 0.92rem;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-brand p {
+      max-width: 360px;
+      line-height: 1.6;
+    }
+    .footer-col h4 {
+      color: var(--text-main);
+      font-size: 1.05rem;
+      margin-bottom: 18px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col ul a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+    .footer-col ul a:hover {
+      color: var(--cyan);
+    }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--border-glass);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 40px;
+      }
+      .hero-content {
+        align-items: center;
+      }
+      .hero-subtitle {
+        margin: 0 auto;
+      }
+      .hero-stats-row {
+        justify-content: center;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .mode-content-panel {
+        grid-template-columns: 1fr;
+      }
+      .vip-offline-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .btn-nav-play {
+        display: none;
+      }
+      .nav-toggle {
+        display: block;
+      }
+      .nav-links.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(7, 10, 20, 0.98);
+        border-bottom: 1px solid var(--border-glass);
+        padding: 24px;
+        gap: 18px;
+      }
+      .phone-mockup-wrapper {
+        width: 250px;
+      }
+      .floating-card-tag {
+        display: none;
+      }
+      .modes-showcase {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient light orbs -->
+  <div class="ambient-glow glow-top-left"></div>
+  <div class="ambient-glow glow-top-right"></div>
+  <div class="ambient-glow glow-mid"></div>
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <img src="favicon.png" alt="Icono One Tap Strike!" class="nav-logo">
+        <span class="nav-title">One Tap Strike!</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#features">Características</a></li>
+        <li><a href="#modes">Modos de Juego</a></li>
+        <li><a href="#gallery">Capturas</a></li>
+        <li><a href="#vip">Pase VIP</a></li>
+        <li><a href="https://ajopollo.github.io/onetapstrike-privacy/" target="_blank" rel="noopener">Privacidad</a></li>
+      </ul>
+
+      <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-nav-play">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 20.5v-17c0-.86.95-1.37 1.66-.91l14.28 8.5c.7.42.7 1.41 0 1.83l-14.28 8.5c-.71.46-1.66-.05-1.66-.92z"/>
+        </svg>
+        Descargar Gratis
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="badge-pill">
+          <span>🚀</span> ¡YA EN GOOGLE PLAY! • VERSIÓN OFICIAL 1.0.12
+        </div>
+
+        <h1 class="hero-title">
+          Reflejos Puros.<br>
+          <span class="gradient-text">Acción Instantánea.</span><br>
+          Un Solo Toque.
+        </h1>
+
+        <p class="hero-subtitle">
+          El arcade casual más vertiginoso de Android. Esquiva el enjambre, golpea con precisión milimétrica, domina más de 40 mundos y conquista el podio mundial.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
+            <svg class="gp-icon-svg" viewBox="0 0 512 512">
+              <path fill="#4285f4" d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1z"/>
+              <path fill="#34a853" d="M47 38.6c-4.4 7.6-7 16.7-7 26.6v381.6c0 9.9 2.6 19 7 26.6l238.1-237.4L47 38.6z"/>
+              <path fill="#fbbc04" d="M325.3 277.7l60.1 60.1L104.6 499l220.7-221.3z"/>
+              <path fill="#ea4335" d="M465 228.3L385.4 183l-60.1 51.3 60.1 51.3 79.6-45.3c14.2-8.1 22.8-23.2 22.8-39.6-.1-16.5-8.7-31.5-22.8-39.7z"/>
+            </svg>
+            <div class="gp-text-col">
+              <span class="gp-subtext">Disponible en</span>
+              <span class="gp-maintext">Google Play</span>
+            </div>
+          </a>
+
+          <a href="#modes" class="btn-secondary">
+            <span>Explorar Modos</span>
+            <span>↓</span>
+          </a>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="stat-pill"><span class="stat-icon">⚡</span> 60 FPS Fluidos</div>
+          <div class="stat-pill"><span class="stat-icon">🛡️</span> PEGI 3 / Todo Público</div>
+          <div class="stat-pill"><span class="stat-icon">📶</span> 100% Jugable Offline</div>
+          <div class="stat-pill"><span class="stat-icon">🏆</span> Ranking Cloud Global</div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="phone-mockup-wrapper">
+          <div class="floating-card-tag tag-left">
+            <span>🔥</span> +40 Mundos Únicos
+          </div>
+          <div class="floating-card-tag tag-right">
+            <span>🏆</span> Marcadores en Vivo
+          </div>
+
+          <div class="phone-screen">
+            <img src="assets/img/screenshot-gameplay.png" alt="Captura de partida One Tap Strike!">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Jugabilidad y Rendimiento</span>
+          <h2 class="section-title">Diseñado para la <span class="gradient-text">Velocidad y Adicción</span></h2>
+          <p class="section-desc">
+            Sin esperas, sin pantallas de carga interminables ni menús complicados. Abre el juego y comienza a golpear en menos de 2 segundos.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">👆</div>
+            <h3 class="feature-title">Mecánica One-Tap Pura</h3>
+            <p class="feature-text">
+              Un solo dedo es suficiente. Toca en el momento exacto para asestar el golpe definitivo. Calibrado con latencia táctil ultrabaja a 60 fotogramas por segundo.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🌌</div>
+            <h3 class="feature-title">40 Mundos y 3 Capítulos</h3>
+            <p class="feature-text">
+              Avanza a través de bosques mágicos, desiertos ardientes y dimensiones cósmicas. Cada fase introduce nuevas trayectorias, trampas y jefes de capítulo.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">📅</div>
+            <h3 class="feature-title">Reto Diario Dinámico</h3>
+            <p class="feature-text">
+              Un nivel procedimental exclusivo cada 24 horas. Pon a prueba tus reflejos con condiciones extremas y desbloquea recompensas especiales del día.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🎃</div>
+            <h3 class="feature-title">Eventos de Temporada</h3>
+            <p class="feature-text">
+              Celebra Halloween, Navidad, San Valentín, Primavera y Verano con mundos decorados, efectos climáticos únicos e insectos temáticos.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">⚔️</div>
+            <h3 class="feature-title">Modo Duelo Táctico</h3>
+            <p class="feature-text">
+              Enfrentamientos cara a cara al mejor de 3 o 5 asaltos. Lee el ritmo del rival, engaña con tus tiempos de reacción y logra la victoria.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">☁️</div>
+            <h3 class="feature-title">Ranking Cloud en Tiempo Real</h3>
+            <p class="feature-text">
+              Compite por la mejor puntuación de cada capítulo. Sincronización instantánea en la nube sin necesidad de registros engorrosos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Game Modes Showcase Section -->
+    <section id="modes">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Variedad Arcade</span>
+          <h2 class="section-title">Modos de Juego para <span class="gradient-text">Cada Momento</span></h2>
+          <p class="section-desc">
+            Ya tengas 30 segundos en la parada del autobús o una hora de descanso, One Tap Strike! se adapta a ti.
+          </p>
+        </div>
+
+        <div class="modes-showcase">
+          <div class="modes-tabs">
+            <button class="mode-tab-btn active" onclick="switchModeTab('campana')">🌍 Campaña Principal</button>
+            <button class="mode-tab-btn" onclick="switchModeTab('diario')">📅 Reto Diario</button>
+            <button class="mode-tab-btn" onclick="switchModeTab('duelo')">⚔️ Modo Duelo</button>
+            <button class="mode-tab-btn" onclick="switchModeTab('temporadas')">❄️ Temporadas Festivas</button>
+          </div>
+
+          <!-- Tab 1: Campaña -->
+          <div class="mode-content-panel active" id="mode-campana">
+            <div class="mode-info-col">
+              <h3>Campaña de 40 Mundos</h3>
+              <p>
+                Un viaje emocionante dividido en 3 capítulos independientes. Supera oleadas de dificultad creciente con enemigos acorazados, trayectorias helicoidales y combates épicos contra jefes colosales.
+              </p>
+              <ul class="mode-points-list">
+                <li><span class="bullet-icon">✓</span> Más de 200 fases interconectadas</li>
+                <li><span class="bullet-icon">✓</span> Desbloqueo progresivo de escenarios y paletas</li>
+                <li><span class="bullet-icon">✓</span> Bonificaciones multiplicadoras de combo</li>
+              </ul>
+              <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
+                <span class="gp-maintext">Jugar Campaña Gratis</span>
+              </a>
+            </div>
+            <div class="mode-preview-img-box">
+              <img src="assets/img/world_select.webp" alt="Selección de Mundos de One Tap Strike!">
+            </div>
+          </div>
+
+          <!-- Tab 2: Reto Diario -->
+          <div class="mode-content-panel" id="mode-diario">
+            <div class="mode-info-col">
+              <h3>Reto Diario Procedural</h3>
+              <p>
+                A las 00:00 UTC de cada día, el sistema genera un desafío totalmente nuevo con modificadores de velocidad y número de objetivos. ¡Consigue la máxima medalla antes de que termine el día!
+              </p>
+              <ul class="mode-points-list">
+                <li><span class="bullet-icon">✓</span> 1 Intento gratuito al día (ilimitado con Pase VIP)</li>
+                <li><span class="bullet-icon">✓</span> Puntos multiplicados para el taller de mejoras</li>
+                <li><span class="bullet-icon">✓</span> Lluvia festiva de confeti de moscas al completarlo</li>
+              </ul>
+              <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
+                <span class="gp-maintext">Ver Reto de Hoy</span>
+              </a>
+            </div>
+            <div class="mode-preview-img-box">
+              <img src="assets/img/daily.webp" alt="Reto Diario de One Tap Strike!">
+            </div>
+          </div>
+
+          <!-- Tab 3: Duelo -->
+          <div class="mode-content-panel" id="mode-duelo">
+            <div class="mode-info-col">
+              <h3>Modo Duelo Táctico</h3>
+              <p>
+                La prueba de fuego para tus reflejos. Enfréntate en duelos de precisión donde cada toque cuenta. Si golpeas en falso o te adelantas, tu oponente ganará el asalto.
+              </p>
+              <ul class="mode-points-list">
+                <li><span class="bullet-icon">✓</span> Partidas rápidas y electrizantes</li>
+                <li><span class="bullet-icon">✓</span> Escenarios diurnos y nocturnos por capítulo</li>
+                <li><span class="bullet-icon">✓</span> IA adaptativa que aprende de tu timing</li>
+              </ul>
+              <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
+                <span class="gp-maintext">Entrar a Duelo</span>
+              </a>
+            </div>
+            <div class="mode-preview-img-box">
+              <img src="assets/img/duel.webp" alt="Modo Duelo de One Tap Strike!">
+            </div>
+          </div>
+
+          <!-- Tab 4: Temporadas -->
+          <div class="mode-content-panel" id="mode-temporadas">
+            <div class="mode-info-col">
+              <h3>Eventos de Temporada Exclusivos</h3>
+              <p>
+                Disfruta de eventos temáticos a lo largo del año con fondos animados, bandas sonoras estacionales y enemigos especiales como murciélagos de Halloween o elfos navideños.
+              </p>
+              <ul class="mode-points-list">
+                <li><span class="bullet-icon">✓</span> Halloween con niebla y criaturas oscuras</li>
+                <li><span class="bullet-icon">✓</span> Navidad con copos de nieve procedurales</li>
+                <li><span class="bullet-icon">✓</span> Primavera, San Valentín y Verano soleado</li>
+              </ul>
+              <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
+                <span class="gp-maintext">Descubrir Temporadas</span>
+              </a>
+            </div>
+            <div class="mode-preview-img-box">
+              <img src="assets/img/season_halloween.webp" alt="Temporada Halloween One Tap Strike!">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Galería Visual</span>
+          <h2 class="section-title">Capturas del <span class="gradient-text">Juego en Vivo</span></h2>
+          <p class="section-desc">
+            Haz clic en cualquier imagen para verla en pantalla completa.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item" onclick="openLightbox('assets/img/screenshot-gameplay.png')">
+            <img src="assets/img/screenshot-gameplay.png" alt="Acción frenética in-game">
+            <div class="gallery-caption">Acción Frenética In-Game</div>
+          </div>
+
+          <div class="gallery-item" onclick="openLightbox('assets/img/screenshot-menu.png')">
+            <img src="assets/img/screenshot-menu.png" alt="Menú principal y personalización">
+            <div class="gallery-caption">Menú y Modos de Juego</div>
+          </div>
+
+          <div class="gallery-item" onclick="openLightbox('assets/img/world_select.webp')">
+            <img src="assets/img/world_select.webp" alt="Selección de mundos y capítulos">
+            <div class="gallery-caption">40 Mundos Desbloqueables</div>
+          </div>
+
+          <div class="gallery-item" onclick="openLightbox('assets/img/achievements.webp')">
+            <img src="assets/img/achievements.webp" alt="Sala de logros y trofeos">
+            <div class="gallery-caption">Logros y Trofeos Épicos</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIP & Offline Section -->
+    <section id="vip">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Comodidad Total</span>
+          <h2 class="section-title">Juega <span class="gold-gradient-text">A Tu Ritmo</span> y Sin Límites</h2>
+        </div>
+
+        <div class="vip-offline-grid">
+          <!-- Offline Card -->
+          <div class="offline-card">
+            <span class="card-badge badge-cyan">📶 100% Sin Conexión</span>
+            <h3 style="font-size: 1.8rem; margin-bottom: 14px;">Diversión en Cualquier Lugar</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+              ¿Viajas en metro, avión o estás en una zona sin cobertura? One Tap Strike! no te deja tirado: toda la campaña, los mundos y las partidas locales funcionan a la perfección sin consumir ni un solo mega de datos.
+            </p>
+            <ul class="mode-points-list">
+              <li><span class="bullet-icon">✓</span> Cero esperas de conexión</li>
+              <li><span class="bullet-icon">✓</span> Batería optimizada con aceleración GPU nativa</li>
+              <li><span class="bullet-icon">✓</span> Sincroniza tus récords cuando vuelvas a tener red</li>
+            </ul>
+          </div>
+
+          <!-- VIP Card -->
+          <div class="vip-card">
+            <span class="card-badge badge-gold">👑 Pase VIP Permanente</span>
+            <h3 style="font-size: 1.8rem; margin-bottom: 14px;"><span class="gold-gradient-text">Experiencia Pura Sin Anuncios</span></h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+              Disfruta del juego en su máxima expresión. Un único pago económico para toda la vida a través de Google Play Billing:
+            </p>
+            <ul class="mode-points-list">
+              <li><span class="bullet-icon" style="color: var(--gold);">★</span> Eliminación total de anuncios intersticiales obligatorios</li>
+              <li><span class="bullet-icon" style="color: var(--gold);">★</span> Reintentos ilimitados en el Reto Diario</li>
+              <li><span class="bullet-icon" style="color: var(--gold);">★</span> Acceso instantáneo a todos los capítulos</li>
+              <li><span class="bullet-icon" style="color: var(--gold);">★</span> Corona dorada VIP exclusiva en tu perfil</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Call to Action -->
+    <section>
+      <div class="section-container">
+        <div class="cta-banner">
+          <h2 class="cta-title">¿Tienes los reflejos más rápidos del mundo?</h2>
+          <p class="cta-desc">
+            Únete a miles de jugadores. Descarga One Tap Strike! gratis hoy mismo en Google Play Store y reclama tu puesto en la gloria arcade.
+          </p>
+          <div class="cta-buttons">
+            <a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener" class="btn-google-play">
+              <svg class="gp-icon-svg" viewBox="0 0 512 512">
+                <path fill="#4285f4" d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1z"/>
+                <path fill="#34a853" d="M47 38.6c-4.4 7.6-7 16.7-7 26.6v381.6c0 9.9 2.6 19 7 26.6l238.1-237.4L47 38.6z"/>
+                <path fill="#fbbc04" d="M325.3 277.7l60.1 60.1L104.6 499l220.7-221.3z"/>
+                <path fill="#ea4335" d="M465 228.3L385.4 183l-60.1 51.3 60.1 51.3 79.6-45.3c14.2-8.1 22.8-23.2 22.8-39.6-.1-16.5-8.7-31.5-22.8-39.7z"/>
+              </svg>
+              <div class="gp-text-col">
+                <span class="gp-subtext">Instalar ahora en</span>
+                <span class="gp-maintext">Google Play Store</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <img src="favicon.png" alt="Logo" style="width: 38px; height: 38px; border-radius: 10px;">
+          <span style="font-size: 1.25rem; font-weight: 800; color: #fff;">One Tap Strike!</span>
+        </div>
+        <p>
+          Videojuego arcade casual para dispositivos móviles Android. Diseñado y desarrollado con pasión por José Luis González Valero (JLGvalero).
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#features">Características</a></li>
+          <li><a href="#modes">Modos de Juego</a></li>
+          <li><a href="#gallery">Galería</a></li>
+          <li><a href="#vip">Pase VIP</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal y Soporte</h4>
+        <ul>
+          <li><a href="https://ajopollo.github.io/onetapstrike-privacy/" target="_blank" rel="noopener">Política de Privacidad</a></li>
+          <li><a href="app-ads.txt" target="_blank">Verificación app-ads.txt</a></li>
+          <li><a href="https://play.google.com/store/apps/details?id=io.onetap.strike" target="_blank" rel="noopener">Ficha de Google Play</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        &copy; 2026 <strong>One Tap Strike!</strong> — Desarrollado por <strong>José Luis González Valero</strong>. Todos los derechos reservados.
+      </div>
+      <div>
+        Clasificación IARC PEGI 3 • Apto para todos los públicos
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Cerrar">&times;</button>
+    <img src="" alt="Vista previa ampliada" id="lightboxImg">
+  </div>
+
+  <script>
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('mobile-open');
+      });
+      // Close mobile menu on link click
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('mobile-open'));
+      });
+    }
+
+    // Game modes tabs switcher
+    function switchModeTab(tabId) {
+      document.querySelectorAll('.mode-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.mode-content-panel').forEach(panel => panel.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      const targetPanel = document.getElementById('mode-' + tabId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    }
+
+    // Lightbox modal functionality
+    function openLightbox(src) {
+      const box = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      if (box && img) {
+        img.src = src;
+        box.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeLightbox() {
+      const box = document.getElementById('lightbox');
+      if (box) {
+        box.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
